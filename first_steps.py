@@ -13,13 +13,20 @@ import time
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(10, GPIO.OUT)
 GPIO.setup(11, GPIO.OUT)
-step_size = 0.01
-duration = 28 
+step_size = 0.05
+duration = 10 
+
+increment = 0.6
+left_count = 0
 
 for i in range(duration):
-    
+    left_count += increment
+
     print "Start Pulse square wave"
-    GPIO.output(10, True)
+    if left_count > 1:
+       GPIO.output(10, True)
+       left_count -= 1
+       print "Left side impulse " + str(left_count)
     GPIO.output(11, True)
     
     time.sleep(step_size)
